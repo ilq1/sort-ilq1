@@ -1,0 +1,26 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        use_mmap: [ON, OFF]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure CMake (mmap=${{ matrix.use_mmap }})
+      working-directory: sort_strings
+      run: cmake -B build -DUSE_MEMORY_MAPPING=${{ matrix.use_mmap }} .
+
+    - name: Build
+      working-directory: sort_strings
+      run: cmake --build build --parallel
+
+    - name: Run tests
+      working-directory: sort_strings/build
+      run: ctest --verbose
