@@ -20,8 +20,7 @@
 
 ## Требования
 - CMake 3.10+
-- Компилятор с поддержкой C11
-- Для тестирования: CTest (встроен в CMake)
+- Для тестирования: CTest
 
 ## Сборка
 ```bash
@@ -32,8 +31,4 @@ make
 
 # Сборка с использованием mmap
 cmake -DUSE_MEMORY_MAPPING=ON ..
-make
-
-# Сборка с тестами
-cmake -DUSE_MEMORY_MAPPING=OFF ..  # или ON
 make
